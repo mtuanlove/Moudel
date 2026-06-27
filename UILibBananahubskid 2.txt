@@ -2177,7 +2177,6 @@ end
 					end
 
   function sectionFunction.CreateParagraph(Setting)
-
     local Title = tostring(Setting.Title or "")
     local Desc = tostring(Setting.Desc or "")
 
@@ -2186,74 +2185,59 @@ end
     local Corner = Instance.new("UICorner")
     local TitleLabel = Instance.new("TextLabel")
     local DescLabel = Instance.new("TextLabel")
-    local Layout = Instance.new("UIListLayout")
-    local Padding = Instance.new("UIPadding")
 
     ParagraphFrame.Parent = Section
     ParagraphFrame.BackgroundTransparency = 1
-    ParagraphFrame.Size = UDim2.new(1,0,0,0)
-    ParagraphFrame.AutomaticSize = Enum.AutomaticSize.Y
+    ParagraphFrame.Size = UDim2.new(1,0,0,52)
 
     ParagraphBG.Parent = ParagraphFrame
     ParagraphBG.AnchorPoint = Vector2.new(.5,0)
     ParagraphBG.Position = UDim2.new(.5,0,0,0)
-    ParagraphBG.Size = UDim2.new(1,-10,0,0)
-    ParagraphBG.AutomaticSize = Enum.AutomaticSize.Y
+    ParagraphBG.Size = UDim2.new(1,-10,1,0)
     ParagraphBG.BackgroundColor3 = getgenv().UIColor["Label Color"]
     ParagraphBG.BackgroundTransparency = getgenv().UIColor["Background 1 Transparency"]
 
     Corner.Parent = ParagraphBG
     Corner.CornerRadius = UDim.new(0,4)
 
-    Padding.Parent = ParagraphBG
-    Padding.PaddingTop = UDim.new(0,8)
-    Padding.PaddingBottom = UDim.new(0,8)
-    Padding.PaddingLeft = UDim.new(0,10)
-    Padding.PaddingRight = UDim.new(0,10)
-
-    Layout.Parent = ParagraphBG
-    Layout.SortOrder = Enum.SortOrder.LayoutOrder
-    Layout.Padding = UDim.new(0,4)
-
     TitleLabel.Parent = ParagraphBG
     TitleLabel.BackgroundTransparency = 1
-    TitleLabel.AutomaticSize = Enum.AutomaticSize.Y
-    TitleLabel.Size = UDim2.new(1,0,0,0)
+    TitleLabel.Position = UDim2.new(0,10,0,6)
+    TitleLabel.Size = UDim2.new(1,-20,0,18)
     TitleLabel.Font = Enum.Font.GothamBold
+    TitleLabel.Text = Title
     TitleLabel.TextSize = 14
     TitleLabel.TextXAlignment = Enum.TextXAlignment.Left
-    TitleLabel.TextWrapped = true
     TitleLabel.TextColor3 = getgenv().UIColor["Title Text Color"]
-    TitleLabel.Text = Title
 
     DescLabel.Parent = ParagraphBG
     DescLabel.BackgroundTransparency = 1
-    DescLabel.AutomaticSize = Enum.AutomaticSize.Y
-    DescLabel.Size = UDim2.new(1,0,0,0)
+    DescLabel.Position = UDim2.new(0,10,0,24)
+    DescLabel.Size = UDim2.new(1,-20,0,20)
     DescLabel.Font = Enum.Font.Gotham
-    DescLabel.TextSize = 13
-    DescLabel.TextXAlignment = Enum.TextXAlignment.Left
-    DescLabel.TextWrapped = true
-    DescLabel.TextColor3 = getgenv().UIColor["Text Color"]
     DescLabel.Text = Desc
+    DescLabel.TextSize = 13
+    DescLabel.TextWrapped = true
+    DescLabel.TextXAlignment = Enum.TextXAlignment.Left
+    DescLabel.TextColor3 = getgenv().UIColor["Text Color"]
 
     local Paragraph = {}
 
-    function Paragraph:Set(tbl)
-        if tbl.Title then
-            TitleLabel.Text = tostring(tbl.Title)
+    function Paragraph:Set(Data)
+        if Data.Title then
+            TitleLabel.Text = tostring(Data.Title)
         end
-        if tbl.Desc then
-            DescLabel.Text = tostring(tbl.Desc)
+        if Data.Desc then
+            DescLabel.Text = tostring(Data.Desc)
         end
     end
 
-    function Paragraph:SetTitle(text)
-        TitleLabel.Text = tostring(text)
+    function Paragraph:SetTitle(Text)
+        TitleLabel.Text = tostring(Text)
     end
 
-    function Paragraph:SetDesc(text)
-        DescLabel.Text = tostring(text)
+    function Paragraph:SetDesc(Text)
+        DescLabel.Text = tostring(Text)
     end
 
     function Paragraph:Hide()
@@ -2270,6 +2254,7 @@ end
 
     return Paragraph
 end
+
 
 					function sectionFunction.CreateSlider(Setting, Callback)
 						
